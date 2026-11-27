@@ -1,4 +1,9 @@
-FROM python:3.14-slim
+# Pinned to a digest so a rebuild cannot silently reuse a stale base. The tag
+# alone gave no guarantee which Debian point release (perl-base) or which pip
+# (vendors its own certifi) ended up in the image. Bump the digest to pick up
+# base-image security fixes:
+#   crane digest python:3.14-slim
+FROM python:3.14-slim@sha256:22eafb370920ad8b429e0aec3fff433e0669968519f5d60469d83729c138b28b
 
 WORKDIR /app
 
